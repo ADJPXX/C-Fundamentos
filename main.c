@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include <string.h>
 
 
-float somar(float a, float b) {
+/*float somar(float a, float b) {
     return a + b;
 }
 
@@ -23,8 +23,41 @@ float dividir(float a, float b) {
 }
 
 
-int main(void) {
+int tamanhoString(char texto[]) {
 
+    int quantidadeLetras = 0;
+
+    for (int i = 0; texto[i] != '\0'; i++) {
+        if (texto[i] == '\n') {
+            break;
+        }
+        quantidadeLetras += 1;
+    }
+
+    return quantidadeLetras;
+}
+
+
+void mostrarString(char texto[]) {
+
+    for (int i = 0; texto[i] != '\0'; i++) {
+        if (texto[i] == '\n') {
+            break;
+        }
+
+        printf("%c", texto[i]);
+    }
+}*/
+
+
+struct Aluno {
+    char nome[50];
+
+    float nota;
+};
+
+
+int main(void) {
     /*printf("Hello, World!\n");
 
     int n1=0;
@@ -272,7 +305,7 @@ int main(void) {
 
     *ponteiro = 50;
 
-    printf("Novo valor da idade: %d\n", idade);*/
+    printf("Novo valor da idade: %d\n", idade);
 
     int numeros[5] = {10, 20, 30, 40, 50};
 
@@ -283,6 +316,146 @@ int main(void) {
         printf("Valor: %d\n", ponteiro[i]);
     }
 
+    char nome[50];
+    int quantidadeLetras = 0;
+    char ultimaLetra;
+
+    printf("Digite seu nome: ");
+
+    fgets(nome, 50, stdin);
+
+    for (int i = 0; nome[i] != '\0'; i++) {
+
+        if (nome[i] == '\n') {
+            break;
+        }
+
+        printf("%c\n", nome[i]);
+
+        quantidadeLetras += 1;
+    }
+
+    ultimaLetra = nome[quantidadeLetras - 1];
+
+    printf("Quantidade de letras no seu nome: %d\n", quantidadeLetras);
+
+    printf("Primeira letra do seu nome: %c\n", nome[0]);
+
+    printf("Ultima letra do seu nome: %c\n", ultimaLetra);
+
+    char string[100];
+    int quantidadeLetras = 0;
+
+    printf("Digite algo: ");
+
+    fgets(string, 100, stdin);
+
+    quantidadeLetras = tamanhoString(string);
+
+    mostrarString(string);
+
+    printf("\nQuantidade de letras na string: %d", quantidadeLetras);
+
+    int quantidadeNotas = 0;
+
+    float media = 0;
+    float soma = 0;
+
+    printf("Quantas notas voce quer digitar? ");
+
+    scanf("%d", &quantidadeNotas);
+
+    int *notas = malloc(quantidadeNotas * sizeof(int));
+
+    if (notas == NULL) {
+        printf("Erro ao alocar memoria\n");
+
+        return 1;
+    }
+
+    for (int i = 0; i < quantidadeNotas; i++) {
+        printf("Digite a nota %d: ", i + 1);
+
+        scanf("%d", &notas[i]);
+
+        soma += notas[i];
+    }
+
+    media = soma / quantidadeNotas;
+
+    printf("A media das notas digitadas = %.2f\n", media);
+
+    free(notas);
+
+    int quantidadeAlunos = 0;
+
+    float somaNotas = 0;
+    float mediaNotas = 0;
+
+    char nomeAluno[50];
+
+    printf("Quantos alunos? ");
+    scanf("%d", &quantidadeAlunos);
+
+    while (getchar() != '\n');
+
+    struct Aluno *alunos = malloc(quantidadeAlunos * sizeof(struct Aluno));
+
+    if (alunos == NULL) {
+        printf("Erro ao alocar memoria");
+
+        return 1;
+    }
+
+    float maiorNota = 0;
+    float menorNota = 0;
+
+    for (int i = 0; i < quantidadeAlunos; i++) {
+        printf("Insira o nome do aluno %d: ", i + 1);
+        fgets(alunos[i].nome, 50, stdin);
+
+        printf("Insira a nota do aluno %d: ", i + 1);
+        scanf("%f", &alunos[i].nota);
+
+        while (getchar() != '\n');
+
+        if (i == 0) {
+            maiorNota = alunos[i].nota;
+            menorNota = alunos[i].nota;
+        }
+
+        somaNotas += alunos[i].nota;
+
+        if (alunos[i].nota < menorNota) {
+            menorNota = alunos[i].nota;
+        }
+
+        if (alunos[i].nota > maiorNota) {
+            maiorNota = alunos[i].nota;
+        }
+
+    }
+
+    for (int i = 0; i < quantidadeAlunos; i++) {
+        printf("Aluno %d\n", i + 1);
+
+        printf("Nome: %s", alunos[i].nome);
+
+        printf("Nota: %.2f\n\n", alunos[i].nota);
+
+    }
+
+    mediaNotas = somaNotas / (float)quantidadeAlunos;
+
+    printf("\nMaior nota da turma: %.2f\n", maiorNota);
+
+    printf("Menor nota da turma: %.2f\n", menorNota);
+
+    printf("Media da turma: %.2f\n", mediaNotas);
+
+    free(alunos);*/
+
+    
 
     return 0;
 }
